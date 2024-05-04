@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import "home_page.dart";
+import "to_do_page.dart";
+import "calendar_page.dart";
 
 void main() {
   runApp(const MyApp());
@@ -17,4 +18,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int index = 0;
+  final List<Widget> widgets = [
+    const ToDoPage(),
+    const CalendarPage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        height: 60,
+        selectedIndex: index,
+        onDestinationSelected: (index) => setState(
+          () => this.index = index,
+        ),
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.rate_review),
+            label: "Список дел",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.insert_invitation),
+            label: "Напоминания",
+          ),
+        ],
+      ),
+      body: widgets[index],
+    );
+  }
+}

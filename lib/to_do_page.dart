@@ -2,14 +2,14 @@ import "package:flutter/material.dart";
 import "todo_item.dart";
 
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class ToDoPage extends StatefulWidget {
+  const ToDoPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ToDoPage> createState() => _ToDoPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ToDoPageState extends State<ToDoPage> {
   final List<ToDoItem> _todoList = [];
 
   final myController = TextEditingController();
