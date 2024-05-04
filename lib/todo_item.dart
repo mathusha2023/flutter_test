@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 
 class ToDoItem extends StatefulWidget {
   const ToDoItem({super.key, required this.text, required this.deleteCallback});
+
   final String text;
   final Function deleteCallback;
 
@@ -12,6 +13,7 @@ class ToDoItem extends StatefulWidget {
 
 class _ToDoItemState extends State<ToDoItem> {
   _ToDoItemState(this._text, this._callback);
+
   String _text;
   bool _isDone = false;
   final Function _callback;
@@ -35,7 +37,7 @@ class _ToDoItemState extends State<ToDoItem> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TextButton(
+            Flexible(child: TextButton(
               onPressed: () => showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -57,7 +59,8 @@ class _ToDoItemState extends State<ToDoItem> {
                         child: const Text("Сохранить"),
                         onPressed: () {
                           setState(() {
-                            if (myController.text.isNotEmpty) {
+                            if (myController.text.isNotEmpty &&
+                                myController.text.trim() != "") {
                               _text = myController.text;
                               myController.clear();
                             }
@@ -69,19 +72,21 @@ class _ToDoItemState extends State<ToDoItem> {
                   );
                 },
               ),
-              child: Text(_text,
-                  style: _isDone
-                      ? const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    decoration: TextDecoration.lineThrough,
-                    decorationThickness: 2.0,
-                  )
-                      : const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  )),
-            ),
+              child: Text(
+                _text,
+                style: _isDone
+                    ? const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        decoration: TextDecoration.lineThrough,
+                        decorationThickness: 2.0,
+                      )
+                    : const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+              ),
+            ),),
             Stack(
               children: [
                 Checkbox(
